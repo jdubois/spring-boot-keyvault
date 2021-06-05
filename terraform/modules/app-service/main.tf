@@ -43,6 +43,6 @@ resource "azurerm_app_service" "application" {
     "SPRING_PROFILES_ACTIVE"     = "prod,azure"
 
     # Secrets from Key Vault
-    "SECRET_SAUCE" = "@Microsoft.KeyVault(SecretUri=${vault_uri}secrets/${secret_sauce})"
+    "SECRET_SAUCE" = "@Microsoft.KeyVault(SecretUri=${var.vault_uri}secrets/${var.secret_sauce})"
   }
 }
