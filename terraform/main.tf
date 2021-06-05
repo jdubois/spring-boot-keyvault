@@ -35,7 +35,7 @@ module "application" {
   environment       = local.environment
   location          = var.location
 
-  vault_uri           = module.key-vault.vault_uri
+  vault_uri    = module.key-vault.vault_uri
   secret_sauce = module.key-vault.secret_sauce
 }
 
