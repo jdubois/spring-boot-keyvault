@@ -2,7 +2,7 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "application" {
-  name                = "examplekeyvault"
+  name                = "kv-${var.application_name}-001"
   resource_group_name = var.resource_group
   location            = var.location
 
