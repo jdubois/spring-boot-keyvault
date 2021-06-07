@@ -36,13 +36,31 @@ resource "azurerm_app_service" "application" {
     ftps_state       = "FtpsOnly"
   }
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   app_settings = {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
 
     # These are app specific environment variables
     "SPRING_PROFILES_ACTIVE"     = "prod,azure"
 
-    # Secrets from Key Vault
+    # Get secrets from Key Vault
     "SECRET_SAUCE" = "@Microsoft.KeyVault(SecretUri=${var.vault_uri}secrets/${var.secret_sauce})"
   }
 }
+
+data "azurerm_client_config" "current" {}
+
+resource "azurerm_key_vault_access_policy" "application" {
+  key_vault_id   = var.vault_id
+  tenant_id      = data.azurerm_client_config.current.tenant_id
+  object_id      = data.azurerm_client_config.current.object_id
+  application_id = azurerm_app_service.application.id
+
+  secret_permissions = [
+    "Get",
+  ]
+}
+

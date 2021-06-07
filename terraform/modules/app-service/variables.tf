@@ -19,6 +19,11 @@ variable "location" {
   description = "The Azure region where all resources in this example should be created"
 }
 
+variable "vault_id" {
+  type        = string
+  description = "The Azure Key Vault ID"
+}
+
 variable "vault_uri" {
   type        = string
   description = "The Azure Key Vault URI"

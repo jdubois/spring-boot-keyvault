@@ -15,11 +15,6 @@ resource "azurerm_key_vault" "application" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
-    key_permissions = [
-      "create",
-      "get",
-    ]
-
     secret_permissions = [
       "set",
       "get",
